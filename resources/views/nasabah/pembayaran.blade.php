@@ -43,7 +43,7 @@
                     <br>
                     <input type="password" inputmode="numeric" name="pin" id="pin" class="form-control" placeholder="Masukan PIN"><br>
                     <a href="{{ url('nasabah/home') }}" class="btn btn-danger">Batalkan</a>
-                    <a href="#" onclick="simpanData()" class="btn btn-primary">Bayar</a>
+                    <button type="button" onclick="simpanData()" class="btn btn-primary">Bayar</button>
                   </ul>
                  
                 </div>

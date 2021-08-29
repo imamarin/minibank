@@ -71,12 +71,12 @@
 
 					</div>
 
-					<div class="text-center w-full">
+					<!-- <div class="text-center w-full">
 						<a class="txt1" href="#">
 							Create new account
 							<i class="fa fa-long-arrow-right"></i>						
 						</a>
-					</div>
+					</div> -->
 				</form>
 			</div>
 		</div>

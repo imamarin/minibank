@@ -35,7 +35,8 @@
                       <b>Alamat</b> <a class="float-right">{{ $nasabah->alamat?$nasabah->alamat:'-' }}</a>
                     </li>
                   </ul>
-                  <button class="btn btn-success w-100"  data-toggle="modal" data-target=".bs-example-modal-lg">Ubah Password</button>
+                  <button class="btn btn-success w-100"  data-toggle="modal" data-target=".bs-example-modal-lg">Ubah Password</button><br><br>
+                  <button class="btn btn-info w-100"  data-toggle="modal" data-target=".bs-example-modal-lg2">Ubah PIN</button>
                   
                 </div>
                 <!-- /.card-body -->
@@ -52,7 +53,7 @@
       <div class="modal-content">
       <form action="{{ url('nasabah/ubahpassword') }}" method="post" id="myForm" name="formData" class="form-horizontal form-label-left" >
           <div class="modal-header">
-          <h6 class="modal-title" id="myModalLabel">Masukan No PIN</h6>
+          <h6 class="modal-title" id="myModalLabel">Masukan Password</h6>
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
           </button>
           </div>
@@ -61,9 +62,10 @@
                   <div class="form-group row ">
                       <div class="col-md-9 col-sm-9 ">
                           <input type="password" name="passlama" value="" class="form-control" required placeholder="Input Password Lama"><br>
-                          <input type="password" name="passbaru" value="" class="form-control" required placeholder="Password Baru"><br>
-                          <input type="password" name="confirmpass" value="" class="form-control" required placeholder="Confirm Password Baru"><br>
+                          <input type="password" name="passbaru" value="" id="pb" onkeyup = "addpass();" class="form-control" required placeholder="Password Baru"><br>
+                          <input type="password" name="confirmpass" value="" id="cp" onkeyup="konfirmasi();" class="form-control" required placeholder="Confirm Password Baru"><br>
                           <input type="hidden" name="username" value="{{ session()->get('username') }}" class="form-control" required>
+                          <span id="validpassword"></span>
                       </div>
                   </div>
 
@@ -76,4 +78,87 @@
       </div>
   </div>
 </div>
+
+<div class="modal fade bs-example-modal-lg2" role="dialog" aria-hidden="true" style="margin-top:80px;">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      <form action="{{ url('nasabah/ubahpin') }}" method="post" id="myForm" name="formData" class="form-horizontal form-label-left" >
+          <div class="modal-header">
+          <h6 class="modal-title" id="myModalLabel">Masukan PIN</h6>
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+          </button>
+          </div>
+          <div class="modal-body">
+                  {{ csrf_field() }}
+                  <div class="form-group row ">
+                      <div class="col-md-9 col-sm-9 ">
+                          <input type="password" name="pinlama" value="" class="form-control" required placeholder="Input PIN Lama"><br>
+                          <input type="password" name="pinbaru" value="" id="pb2" onkeyup = "addpass2();" class="form-control" required placeholder="PIN Baru"><br>
+                          <input type="password" name="confirmpin" value="" id="cp2" onkeyup="konfirmasi2();" class="form-control" required placeholder="Confirm PIN Baru"><br>
+                          <input type="hidden" name="norek" value="{{ session()->get('norek') }}" class="form-control" required>
+                          <span id="validpassword2"></span>
+                      </div>
+                  </div>
+
+              
+          </div>
+          <div class="modal-footer">
+          <button type="submit" name="submit" id="btn2" class="btn btn-success" value="proses">Ubah Password</button>
+          </div>
+      </form>     
+      </div>
+  </div>
+</div>
+<script>
+  var btn = document.querySelector("#btn");
+  var pb = document.querySelector("#pb");
+  var cp = document.querySelector("#cp");
+  var btn2 = document.querySelector("#btn2");
+  var pb2 = document.querySelector("#pb2");
+  var cp2 = document.querySelector("#cp2");
+
+  btn.setAttribute('disabled',true);
+
+  function konfirmasi() {
+    var valid = document.querySelector("#validpassword");
+    if(cp.value == pb.value){
+      cp.style.border = "solid 1px green";
+      pb.style.border = "solid 1px green";
+      valid.innerHTML="Password sesuai";
+      btn.removeAttribute('disabled');
+      valid.style.color = "green";
+    }else{  
+      cp.style.border = "solid 1px red";
+      pb.style.border = "solid 1px red";
+      btn.setAttribute('disabled',true);
+      valid.innerHTML="Password tidak sesuai";
+      valid.style.color = "red";
+    }
+  }
+
+  function addpass() {
+    cp.value="";  
+  }
+
+  function konfirmasi2() {
+    var valid2 = document.querySelector("#validpassword2");
+    if(cp2.value == pb2.value){
+      cp2.style.border = "solid 1px green";
+      pb2.style.border = "solid 1px green";
+      valid2.innerHTML="PIN sesuai";
+      btn2.removeAttribute('disabled');
+      valid2.style.color = "green";
+    }else{  
+      cp2.style.border = "solid 1px red";
+      pb2.style.border = "solid 1px red";
+      btn2.setAttribute('disabled',true);
+      valid2.innerHTML="PIN tidak sesuai";
+      valid2.style.color = "red";
+    }
+  }
+
+  function addpass2() {
+    cp2.value="";  
+  }
+</script>
 @endsection

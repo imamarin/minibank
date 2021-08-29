@@ -31,6 +31,7 @@ Route::middleware('statusloginnasabah')->group(function () {
     Route::get('/nasabah/pembayaran', 'NasabahController@pembayaran')->name('nasabah.pembayaran');
     Route::post('/nasabah/prosespembayaran', 'NasabahController@prosespembayaran')->name('nasabah.prosespembayaran');
     Route::post('/nasabah/ubahpassword', 'NasabahController@ubahpassword')->name('nasabah.ubahpassword');
+    Route::post('/nasabah/ubahpin', 'NasabahController@ubahpin')->name('nasabah.ubahpin');
     Route::get('/scanner', 'ScannerController@index')->name('nasabah.scanner');
     Route::get('nasabah/qrcode', 'NasabahController@qrcode')->name('nasabah.qrcode');
 });

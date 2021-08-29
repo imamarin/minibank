@@ -487,11 +487,28 @@ class NasabahController extends Controller
     }
 
     public function ubahpassword(Request $request){
-        $queri = M_user::where('username','=',$request->passlama)->count();
+        $queri = M_user::where('username','=',$request->username)
+                ->where('password','=',sha1($request->passlama))->count();
         if($queri>0){
             if($request->passbaru == $request->confirmpass){
                 DB::table('users')->where('username','=',$request->username)->update([
                     'password' => sha1($request->passbaru),
+                ]);
+            }           
+            
+            return redirect('/nasabah/profil')->with(['success' => 'Berhasil diubah!']);
+        }else{
+            return redirect('/nasabah/profil')->with(['warning' => 'Tidak berhasil diubah!']);
+        }
+    }
+
+    public function ubahpin(Request $request){
+        $queri = M_rekening::where('norek','=',$request->norek)
+                ->where('pin','=',sha1($request->pinlama))->count();
+        if($queri>0){
+            if($request->pinbaru == $request->confirmpin){
+                DB::table('rekening')->where('norek','=',$request->norek)->update([
+                    'pin' => sha1($request->pinbaru),
                 ]);
             }           
             

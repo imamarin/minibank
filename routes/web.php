@@ -96,6 +96,7 @@ Route::middleware('statuslogin')->group(function () {
     Route::get('/tagihan/add', 'ReqinvoiceController@add')->name('tagihan.add');
     Route::get('/tagihan/edit/{id}', 'ReqinvoiceController@edit')->name('tagihan_edit');
     Route::post('/tagihan/update', 'ReqinvoiceController@update')->name('tagihan_update');
+    Route::get('/tagihan/test_curl', 'ReqinvoiceController@test_curl')->name('test_curl');
 
     Route::get('/printtabungan', 'PrinttabunganController@index')->name('printtabungan');
     Route::get('/printtabungan/cari', 'PrinttabunganController@cari')->name('cariprinttabungan');
